@@ -20,6 +20,7 @@ import mrtjp.core.render.TCubeMapRender
 import mrtjp.core.vec.{Point, Size}
 import mrtjp.core.world.WorldLib
 import mrtjp.projectred.ProjectRedExpansion
+import mrtjp.projectred.core.ShapelessOreNBTRecipe
 import mrtjp.projectred.core.libmc.PRResources
 import net.minecraft.client.Minecraft
 import net.minecraft.client.renderer.texture.IIconRegister
@@ -280,8 +281,8 @@ class SlotProjectCrafting(player:EntityPlayer, tile:TileProjectBench, idx:Int, x
     {
         val eq = new ItemEquality
         eq.matchMeta = !stack1.isItemStackDamageable
-        eq.matchNBT = false
-        eq.matchOre = recipe.isInstanceOf[ShapedOreRecipe] || recipe.isInstanceOf[ShapelessOreRecipe]
+        eq.matchNBT = recipe.isInstanceOf[ShapelessOreNBTRecipe]
+        eq.matchOre = !eq.matchNBT && (recipe.isInstanceOf[ShapedOreRecipe] || recipe.isInstanceOf[ShapelessOreRecipe])
         eq.matches(ItemKey.get(stack1), ItemKey.get(stack2))
     }
 
